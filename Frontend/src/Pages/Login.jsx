@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate} from 'react-router-dom';
+import { UseAuthContext } from '../context/useAuthcontext';
 const Login = () => {
+  const { dispatch } = UseAuthContext();  
   const history = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -30,7 +32,8 @@ const Login = () => {
     })
     const response=await data.json()
     if(response){
-      localStorage.setItem('token',response.token)
+      localStorage.setItem('user', JSON.stringify(response));
+      dispatch({ type: "LOGIN", payload:response });
       alert('Logged in successfully')
       history('/UserForm')
     }

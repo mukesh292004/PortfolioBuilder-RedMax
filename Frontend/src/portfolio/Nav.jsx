@@ -1,60 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-scroll";
 
-const Nav = () => {
-    const [activeItem, setActiveItem] = useState(null);
+const navItems = [
+  {
+    path: "home",
+    name: "Home",
+  },
+  {
+    path: "about",
+    name: "About Me",
+  },
+  {
+    path: "skills",
+    name: "Skills",
+  },
+  {
+    path: "projects",
+    name: "Projects",
+  },
+  {
+    path: "Experience",
+    name: "Experience",
+  },
+  {
+    path: "contact",
+    name: "Contact",
+  },
+];
 
-    const scrollToSection = (id) => {
-        document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        setActiveItem(id);
-    };
+const NavBar = () => {
+  const { pathname } = useLocation();
+  const [hoveredPath, setHoveredPath] = useState(pathname);
 
-    return (
-        <nav className='max-md:justify-center h-20 items-center bg-black flex text-white px-5 justify-between fixed top-0 left-0 w-full z-10'>
-            <div className='font-sans font-bold text-red-500 text-3xl'>Portfolio</div>
-            <ul className='max-md:hidden flex space-x-20 text-[20px]'>
-                <li>
-                    <button
-                        className={`${activeItem === 'home' ? 'text-red-500' : ''} hover:text-red-500 focus:text-red-500`}
-                        onClick={() => scrollToSection('home')}
-                    >
-                        Home
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className={`${activeItem === 'about' ? 'text-red-500' : ''} hover:text-red-500 focus:text-red-500`}
-                        onClick={() => scrollToSection('about')}
-                    >
-                        About Me
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className={`${activeItem === 'skills' ? 'text-red-500' : ''} hover:text-red-500 focus:text-red-500`}
-                        onClick={() => scrollToSection('skills')}
-                    >
-                        Skills
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className={`${activeItem === 'projects' ? 'text-red-500' : ''} hover:text-red-500 focus:text-red-500`}
-                        onClick={() => scrollToSection('projects')}
-                    >
-                        Projects
-                    </button>
-                </li>
-                <li>
-                    <button
-                        className={`${activeItem === 'contact' ? 'text-red-500' : ''} hover:text-red-500 focus:text-red-500`}
-                        onClick={() => scrollToSection('contact')}
-                    >
-                        Contact
-                    </button>
-                </li>
-            </ul>
-        </nav>
-    );
+  const handleItemClick = (path) => {
+    setHoveredPath(path);
+  };
+
+  return (
+    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 w-full max-w-xl z-50">
+      <nav className="flex justify-center items-center  px-2 py-2 bg-white bg-opacity-80 shadow-lg rounded-full dark:bg-gray-800 dark:border-black/40 dark:bg-opacity-75">
+        {navItems.map((item, index) => {
+          const isActive = item.path === hoveredPath;
+
+          return (
+            <Link
+              key={item.path}
+              className={`px-3 py-1 rounded-md text-sm lg:text-base relative no-underline duration-300 ease-in ${
+                isActive ? "text-zinc-100" : "text-zinc-200"
+              }`}
+              activeClass="active"
+              to={item.path}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              onMouseOver={() => setHoveredPath(item.path)}
+              onMouseLeave={() => setHoveredPath(pathname)}
+              onClick={() => handleItemClick(item.path)}
+            >
+              <span>{item.name}</span>
+              {item.path === hoveredPath && (
+                <motion.div
+                  className="absolute bottom-0 left-0 w-full h-full bg-stone-800/80 rounded-md -z-10"
+                  layoutId="navbar"
+                  aria-hidden="true"
+                  style={{
+                    zIndex: -1,
+                  }}
+                  transition={{
+                    type: "spring",
+                    bounce: 0.25,
+                    stiffness: 130,
+                    damping: 9,
+                    duration: 0.3,
+                  }}
+                />
+              )}
+            </Link>
+          );
+        })}
+      </nav>
+    </div>
+  );
 };
 
-export default Nav;
+export default NavBar;

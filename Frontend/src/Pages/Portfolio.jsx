@@ -7,6 +7,7 @@ import Skills from '../portfolio/skills';
 import Projects from '../portfolio/Projects';
 import Contact from '../portfolio/Contact';
 import About from '../portfolio/About';
+import TimelineComponent from '../portfolio/TimeLine';
 
 function Portfolio() {
   const location = useLocation();
@@ -23,24 +24,67 @@ function Portfolio() {
     {
       title:"Project Title",
   description:"Project description goes here...",
-  imageUrl:"data:image/jpeg;base64,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"
+  technologies:["React", "Node.js", "Express", "MongoDB"],
+  imageUrl:"https://media.istockphoto.com/id/1411195926/photo/project-manager-working-on-laptop-and-updating-tasks-and-milestones-progress-planning-with.jpg?s=612x612&w=0&k=20&c=5A0CEsRbIrgnci0Q7LSxbrUZ1pliXy8C04ffpnjnVIw="
 
     },
     {
       title:"Project Title",
   description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+
+  technologies:["React", "Node.js", "Express", "MongoDB"],
   imageUrl:"https://media.istockphoto.com/id/1411195926/photo/project-manager-working-on-laptop-and-updating-tasks-and-milestones-progress-planning-with.jpg?s=612x612&w=0&k=20&c=5A0CEsRbIrgnci0Q7LSxbrUZ1pliXy8C04ffpnjnVIw="
 
     },
     {
       title:"Project Title",
   description:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
+
+  technologies:["React", "Node.js", "Express", "MongoDB"],
   imageUrl:"https://media.istockphoto.com/id/1411195926/photo/project-manager-working-on-laptop-and-updating-tasks-and-milestones-progress-planning-with.jpg?s=612x612&w=0&k=20&c=5A0CEsRbIrgnci0Q7LSxbrUZ1pliXy8C04ffpnjnVIw="
 
     }
    ],
- 
-  }
+   timeline: [
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    },
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    },
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    },
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    },
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    },
+    {
+      date: "January 2022",
+      title: "Creative Director",
+      subtitle: "Miami, FL",
+      description: "Creative Direction, User Experience, Visual Design, Project Management, Team Leading"
+    }
+  ],
+};
+  
   return (
     <>
   <section className='flex-col justify-center item-center h-screen items-center'>
@@ -49,7 +93,9 @@ function Portfolio() {
     <About user={user}/>
     <Skills user={user}/>
     <Projects user={user}/>
+    <TimelineComponent user={user}/>
     <Contact user={user}/>
+    
 
     <Footer/>
    </section>

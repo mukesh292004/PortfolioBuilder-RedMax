@@ -1,5 +1,8 @@
-/** @type {import('tailwindcss').Config} */
-export default {
+// tailwind.config.js
+
+import { Config } from 'tailwindcss';
+
+const config = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -7,5 +10,10 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [
+    require('@tailwindcss/forms'),
+    require("tailwindcss-animate"),
+  ],
+};
+
+export default config;
