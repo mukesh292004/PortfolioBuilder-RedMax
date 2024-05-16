@@ -9,8 +9,8 @@ const Dummy = () => {
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
-    const inputsArray = inputValue.split(/[ ,]+/); // Split input value by comma or space
-    console.log(inputsArray); // Output the array of inputs
+    const inputsArray = inputValue.split(/[ ,]+/); 
+    console.log(inputsArray); 
   };
 
   return (

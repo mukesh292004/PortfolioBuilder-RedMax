@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Footer from "./Footer"
+import React from 'react';
 import Nav from '../portfolio/Nav';
 import Dashboard from '../portfolio/Dashboard';
 import Skills from '../portfolio/skills';
@@ -10,11 +8,8 @@ import About from '../portfolio/About';
 import TimelineComponent from '../portfolio/TimeLine';
 
 function Portfolio() {
-  const location = useLocation();
-  let user=location.state;
-  console.log(user);
-  if(!user)
-   user ={
+ 
+   const user ={
     name: 'Thanos',
     domain: ['Full Stack Developer','UI/UX Designer','Freelancer'],
     skills:['Python', 'JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js','JavaScript', 'React', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'Docker'],
@@ -96,8 +91,6 @@ function Portfolio() {
     <TimelineComponent user={user}/>
     <Contact user={user}/>
     
-
-    <Footer/>
    </section>
    
    </>
